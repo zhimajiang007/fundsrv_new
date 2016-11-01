@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <substitutionProperty name="log.base" value="d:\\logback\\logback\\logs\\" />
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+   	<Encoding>UTF-8</Encoding>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="COMMON-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}common.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="HTTP-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}http.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="UTILS-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}utils.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="TIMER-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}timer.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="DB-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}db.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="SERVICE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}service.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="WEB-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}web.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+  
+  <appender name="API-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Encoding>UTF-8</Encoding>
+	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <FileNamePattern>${log.base}api.%d{yyyy-MM-dd}.log</FileNamePattern>
+        <MaxHistory>30</MaxHistory>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>  
+  
+  <logger name="http">
+  	<appender-ref ref="HTTP-APPENDER"/>
+  </logger>
+  
+  <logger name="utils">
+  	<appender-ref ref="UTILS-APPENDER"/>
+  </logger>
+  
+  <logger name="timer">
+  	<appender-ref ref="TIMER-APPENDER"/>
+  </logger>
+  
+  <logger name="db">
+  	<appender-ref ref="DB-APPENDER"/>
+  </logger>
+  
+  <logger name="common">
+  	<appender-ref ref="COMMON-APPENDER"/>
+  </logger>
+  
+  <logger name="service">
+  	<appender-ref ref="SERVICE-APPENDER"/>
+  </logger>
+  
+  <logger name="web">
+  	<appender-ref ref="WEB-APPENDER"/>
+  </logger> 
+  
+  <logger name="api">
+  	<appender-ref ref="API-APPENDER"/>
+  </logger> 
+  
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="COMMON"/>
+  </root>
+  
+</configuration>

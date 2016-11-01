@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:security="http://www.springframework.org/schema/security"  
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.0.xsd  
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd  
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+<!--      
+    <context:annotation-config />
+ -->	
+	<context:component-scan base-package="com.homaer">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="com.homaer.biz.framework.annotation.Api"/>
+	</context:component-scan>
+	
+	<context:component-scan base-package="com.homaer.fundsrv.biz.api" 
+		scope-resolver="com.homaer.common.configuration.scoperesolver.SingletonResolver"
+		name-generator="com.homaer.biz.framework.api.ApiBeanNameGenerator">
+		<context:include-filter type="annotation" expression="com.homaer.biz.framework.annotation.Api"/>  
+	</context:component-scan>
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:configuration.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!--
+	<import resource="classpath*:daoContext.xml"/>
+	<import resource="classpath*:actionContext.xml"/>
+	-->
+	<import resource="classpath*:serviceContext.xml"/>
+	<!--
+	<import resource="classpath*:observerContext.xml"/>
+	 -->
+	<import resource="classpath*:databaseContext.xml"/>
+
+	<import resource="classpath*:mailContext.xml"/>
+	<import resource="classpath*:memcached.xml"/>
+	<import resource="classpath*:redis.xml"/>
+	<import resource="classpath*:hessian-client.xml"/>
+	<import resource="classpath*:quartz.xml"/>
+	
+	
+</beans>

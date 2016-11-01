@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<!--根据屏幕全局显示-->
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<!--允许全屏模式浏览-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+		<!--指定的iphone中safari顶端的状态条的样式;隐藏状态栏-->
+		<meta name="format-detection" content="telephone=no"/>
+		<!--指定的iphone中safari顶端的状态条的样式-->
+		<meta name="format-detection" content="email=no"/>
+		<!--去除Android平台中对邮箱地址的识别-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<!-- 隐藏地址栏 -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="" />
+    
+		<title>用户注册</title>
+		<link rel="stylesheet" type="text/css" href="../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mobile.css" />
+		<script src="../js/zepto.min.js"></script>
+		<script src="../js/zepto.cookie.min.js"></script>
+		<script src="../js/md5.min.js"></script>
+		<script src="../javascript/register.js"></script>
+	</head>
+	
+	<body>
+		<div class="wrap">
+			<div class="header-new">
+			<!-- 
+				<div class="header-newT">
+					<a href="./index.html"><img src="../img/home.png" class="img2"/><img src="../img/logo1.png" class="img1"/></a>
+				</div>
+			 -->
+			</div>
+			<div class="area">
+				<div class="mod-qiuser-pop">
+					<ul>
+						<li>
+							<span>用户名:</span>
+							<input type="text" id="username" name="username" class="username" placeholder="请使用手机号码作为您的购彩用户名" value="yiyoxy" />
+						</li>
+						<li>
+							<span>密码:</span>
+							<input type="password" id="password" name="username" class="username" placeholder="6-20个字符，不能为汉字（区分大小写）" value="123456" />
+						</li>
+						<li>
+							<span>确认密码:</span>
+							<input type="password" id="repassword" name="username" class="username" placeholder="请再输入一次上面输入的密码" value="123456" />
+						</li>
+						<!-- 
+						<li>
+							<span>验证码:</span><img id="verifycode" style="display:inline-block;width:90px;height:30px;"><span class="getyzm">换一张</span>
+							<input type="tel" id="verifyvalue" name="verifyvalue" class="username" placeholder="请输入验证码" />
+							<input type="text" id="token" hidden/>
+						</li>
+						 -->
+						<li>
+							<button class="btn-register" id="btn-register" type="button">
+								立即注册
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--尾部-->
+			<div class="foot-new" style="margin:10px  20px 0 20px;padding-top:14px;"></div>
+
+		</div>
+	</body>
+
+</html>

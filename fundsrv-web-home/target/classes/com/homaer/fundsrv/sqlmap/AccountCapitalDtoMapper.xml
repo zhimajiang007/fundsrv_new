@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.homaer.fundsrv.mapper.AccountCapitalDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.homaer.fundsrv.module.ib.MarketData" >
+    <id column="account_name" property="account" jdbcType="VARCHAR" />
+    <result column="net_liquidation" property="netLiquidationByCurrency" jdbcType="VARCHAR" />
+    <result column="cash_balance" property="cashBalance" jdbcType="VARCHAR" />
+    <result column="unrealized_pnL" property="unrealizedPnl" jdbcType="VARCHAR" />
+    <result column="realized_pnL" property="realizedPnl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    account_name, net_liquidation, cash_balance, unrealized_pnL, realized_pnL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.homaer.fundsrv.dataobject.AccountCapitalDtoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_account_capital
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_account_capital
+    where account_name = #{account,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_account_capital
+    where account_name = #{account,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.homaer.fundsrv.dataobject.AccountCapitalDtoCriteria" >
+    delete from t_account_capital
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="doCreateOrUpdate" parameterType="com.homaer.fundsrv.module.ib.MarketData" >
+    insert into t_account_capital (account_name, net_liquidation, 
+      cash_balance, unrealized_pnL)
+    values (#{account,jdbcType=VARCHAR}, #{netLiquidationByCurrency,jdbcType=VARCHAR}, 
+      #{cashBalance,jdbcType=VARCHAR}, #{unrealizedPnl,jdbcType=VARCHAR})
+      <if test="cashBalance != null" >
+        ON DUPLICATE KEY UPDATE `cash_balance`= #{cashBalance,jdbcType=VARCHAR}
+      </if>
+      <if test="netLiquidationByCurrency != null" >
+        ON DUPLICATE KEY UPDATE `net_liquidation`= #{netLiquidationByCurrency,jdbcType=VARCHAR}
+      </if>
+      <if test="unrealizedPnl != null" >
+        ON DUPLICATE KEY UPDATE `unrealized_pnL`= #{unrealizedPnl,jdbcType=VARCHAR}
+      </if>
+      <if test="realizedPnl != null" >
+        ON DUPLICATE KEY UPDATE `realized_pnL`= #{realizedPnl,jdbcType=VARCHAR}
+      </if>
+       ;
+  </insert>
+  <insert id="insertSelective" parameterType="com.homaer.fundsrv.module.ib.MarketData" >
+    insert into t_account_capital
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        account_name,
+      </if>
+      <if test="netLiquidationByCurrency != null" >
+        net_liquidation,
+      </if>
+      <if test="cashBalance != null" >
+        cash_balance,
+      </if>
+      <if test="unrealizedPnl != null" >
+        unrealized_pnL,
+      </if>
+      <if test="realizedPnl != null" >
+        realized_pnL,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="netLiquidationByCurrency != null" >
+        #{netLiquidationByCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBalance != null" >
+        #{cashBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="unrealizedPnl != null" >
+        #{unrealizedPnl,jdbcType=VARCHAR},
+      </if>
+      <if test="realizedPnl != null" >
+        #{realizedPnl,jdbcType=VARCHAR},
+      </if>
+      
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.homaer.fundsrv.dataobject.AccountCapitalDtoCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_account_capital
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_account_capital
+    <set >
+      <if test="record.account != null" >
+        account_name = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netLiquidationByCurrency != null" >
+        net_liquidation = #{record.netLiquidationByCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashBalance != null" >
+        cash_balance = #{record.cashBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unrealizedPnl != null" >
+        unrealized_pnL = #{record.unrealizedPnl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realizedPnl != null" >
+        realized_pnL = #{record.realizedPnl,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_account_capital
+    set account_name = #{record.account,jdbcType=VARCHAR},
+      net_liquidation = #{record.netLiquidationByCurrency,jdbcType=VARCHAR},
+      cash_balance = #{record.cashBalance,jdbcType=VARCHAR},
+      unrealized_pnL = #{record.unrealizedPnl,jdbcType=VARCHAR},
+      realized_pnL = #{record.realizedPnl,jdbcType=VARCHAR},
+      
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.homaer.fundsrv.module.ib.MarketData" >
+    update t_account_capital
+    <set >
+      <if test="netLiquidationByCurrency != null" >
+        net_liquidation = #{netLiquidationByCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBalance != null" >
+        cash_balance = #{cashBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="unrealizedPnl != null" >
+        unrealized_pnL = #{unrealizedPnl,jdbcType=VARCHAR},
+      </if>
+      <if test="realizedPnl != null" >
+        realized_pnL = #{realizedPnl,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where account_name = #{account,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.homaer.fundsrv.module.ib.MarketData" >
+    update t_account_capital
+    set net_liquidation = #{netLiquidationByCurrency,jdbcType=VARCHAR},
+      cash_balance = #{cashBalance,jdbcType=VARCHAR},
+      unrealized_pnL = #{unrealizedPnl,jdbcType=VARCHAR},
+      realized_pnL = #{realizedPnl,jdbcType=VARCHAR}
+    where account_name = #{account,jdbcType=VARCHAR}
+  </update>
+</mapper>

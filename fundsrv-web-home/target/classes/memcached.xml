@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:security="http://www.springframework.org/schema/security"  
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.0.xsd  
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd  
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    <!-- XMemcached客户端 -->
+    <bean id="xmemcachedClient" name="xmemcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+        <property name="servers" value="${MEMECACHED_SERVER}"/>
+        <property name="weights" value="${MEMECACHED_SERVER_WEIGHT}"/>
+
+        <!--主备切换-->
+        <!--<property name="failureMode" value="true"/>-->
+
+        <!-- nio 连接池大小 -->
+        <property name="connectionPoolSize" value="${MEMECACHED_CONNECTIONPOOL}"/>
+        <!-- 使用二进制协议,默认是文本协议 -->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"/>
+        </property>
+        <!-- 使用一致性哈希,默认是Hash值取模 -->
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+
+        <!-- Serializing transcoder -->
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+        <!-- ByteBuffer allocator -->
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+
+    </bean>
+
+    <!-- XMemcached的Wrapper -->
+    <bean id="xmemcachedClientWrapper" name="xmemcachedClientWrapper" class="com.homaer.common.cache.memcached.XMemcachedClientWrapper">
+    	<property name="memcachedClient" ref="xmemcachedClient"/>
+    </bean>
+    
+    <bean id="cacheManager" name="cacheManager" class="com.homaer.common.cache.CacheManager"></bean>
+    <bean id="sessionManager" name="sessionManager" class="com.homaer.common.module.context.SessionManager"></bean>
+</beans>

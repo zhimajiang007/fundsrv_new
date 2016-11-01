@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.homaer.fundsrv.mapper.BrokerOrderDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.homaer.fundsrv.dataobject.BrokerOrderDto" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="clientId" property="clientid" jdbcType="VARCHAR" />
+    <result column="permId" property="permid" jdbcType="INTEGER" />
+    <result column="symbol" property="symbol" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="totalquantity" property="totalquantity" jdbcType="INTEGER" />
+    <result column="limitprice" property="limitprice" jdbcType="DOUBLE" />
+    <result column="sent_time" property="sentTime" jdbcType="VARCHAR" />
+    <result column="time_force" property="timeForce" jdbcType="VARCHAR" />
+    <result column="action" property="action" jdbcType="INTEGER" />
+    <result column="finish_time" property="finishTime" jdbcType="VARCHAR" />
+    <result column="action_index" property="actionIndex" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="filled" property="filled" jdbcType="INTEGER" />
+    <result column="remaining" property="remaining" jdbcType="INTEGER" />
+    <result column="avg_fill_price" property="avgFillPrice" jdbcType="VARCHAR" />
+    <result column="last_fill_price" property="lastFillPrice" jdbcType="VARCHAR" />
+    <result column="commission" property="commission" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, clientId, permId, symbol, account, totalquantity, limitprice, sent_time, 
+    time_force, action, finish_time, action_index, status, order_type, create_time, filled, 
+    remaining, avg_fill_price, last_fill_price, commission, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDtoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_broker_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+      ORDER BY sent_time DESC
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_broker_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDtoCriteria" >
+    delete from t_broker_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDto" >
+    insert into t_broker_order (order_id, clientId, permId, 
+      symbol, account, totalquantity, 
+      limitprice, sent_time, time_force, 
+      action, finish_time, action_index, 
+      status, order_type, create_time, 
+      filled, remaining, avg_fill_price, 
+      last_fill_price, commission, user_id
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{permid,jdbcType=INTEGER}, 
+      #{symbol,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{totalquantity,jdbcType=INTEGER}, 
+      #{limitprice,jdbcType=DOUBLE}, #{sentTime,jdbcType=VARCHAR}, #{timeForce,jdbcType=VARCHAR}, 
+      #{action,jdbcType=INTEGER}, #{finishTime,jdbcType=VARCHAR}, #{actionIndex,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{filled,jdbcType=INTEGER}, #{remaining,jdbcType=INTEGER}, #{avgFillPrice,jdbcType=VARCHAR}, 
+      #{lastFillPrice,jdbcType=VARCHAR}, #{commission,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDto" >
+    insert into t_broker_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="clientid != null" >
+        clientId,
+      </if>
+      <if test="permid != null" >
+        permId,
+      </if>
+      <if test="symbol != null" >
+        symbol,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="totalquantity != null" >
+        totalquantity,
+      </if>
+      <if test="limitprice != null" >
+        limitprice,
+      </if>
+      <if test="sentTime != null" >
+        sent_time,
+      </if>
+      <if test="timeForce != null" >
+        time_force,
+      </if>
+      <if test="action != null" >
+        action,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="actionIndex != null" >
+        action_index,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="filled != null" >
+        filled,
+      </if>
+      <if test="remaining != null" >
+        remaining,
+      </if>
+      <if test="avgFillPrice != null" >
+        avg_fill_price,
+      </if>
+      <if test="lastFillPrice != null" >
+        last_fill_price,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="permid != null" >
+        #{permid,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null" >
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="totalquantity != null" >
+        #{totalquantity,jdbcType=INTEGER},
+      </if>
+      <if test="limitprice != null" >
+        #{limitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="sentTime != null" >
+        #{sentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timeForce != null" >
+        #{timeForce,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null" >
+        #{action,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actionIndex != null" >
+        #{actionIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="filled != null" >
+        #{filled,jdbcType=INTEGER},
+      </if>
+      <if test="remaining != null" >
+        #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="avgFillPrice != null" >
+        #{avgFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lastFillPrice != null" >
+        #{lastFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDtoCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_broker_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_broker_order
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientid != null" >
+        clientId = #{record.clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permid != null" >
+        permId = #{record.permid,jdbcType=INTEGER},
+      </if>
+      <if test="record.symbol != null" >
+        symbol = #{record.symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalquantity != null" >
+        totalquantity = #{record.totalquantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitprice != null" >
+        limitprice = #{record.limitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sentTime != null" >
+        sent_time = #{record.sentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeForce != null" >
+        time_force = #{record.timeForce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.action != null" >
+        action = #{record.action,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishTime != null" >
+        finish_time = #{record.finishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actionIndex != null" >
+        action_index = #{record.actionIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filled != null" >
+        filled = #{record.filled,jdbcType=INTEGER},
+      </if>
+      <if test="record.remaining != null" >
+        remaining = #{record.remaining,jdbcType=INTEGER},
+      </if>
+      <if test="record.avgFillPrice != null" >
+        avg_fill_price = #{record.avgFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastFillPrice != null" >
+        last_fill_price = #{record.lastFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commission != null" >
+        commission = #{record.commission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_broker_order
+    set order_id = #{record.orderId,jdbcType=VARCHAR},
+      clientId = #{record.clientid,jdbcType=VARCHAR},
+      permId = #{record.permid,jdbcType=INTEGER},
+      symbol = #{record.symbol,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      totalquantity = #{record.totalquantity,jdbcType=INTEGER},
+      limitprice = #{record.limitprice,jdbcType=DOUBLE},
+      sent_time = #{record.sentTime,jdbcType=VARCHAR},
+      time_force = #{record.timeForce,jdbcType=VARCHAR},
+      action = #{record.action,jdbcType=INTEGER},
+      finish_time = #{record.finishTime,jdbcType=VARCHAR},
+      action_index = #{record.actionIndex,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      filled = #{record.filled,jdbcType=INTEGER},
+      remaining = #{record.remaining,jdbcType=INTEGER},
+      avg_fill_price = #{record.avgFillPrice,jdbcType=VARCHAR},
+      last_fill_price = #{record.lastFillPrice,jdbcType=VARCHAR},
+      commission = #{record.commission,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDto" >
+    update t_broker_order
+    <set >
+      <if test="clientid != null" >
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="permid != null" >
+        permId = #{permid,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null" >
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="totalquantity != null" >
+        totalquantity = #{totalquantity,jdbcType=INTEGER},
+      </if>
+      <if test="limitprice != null" >
+        limitprice = #{limitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="sentTime != null" >
+        sent_time = #{sentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timeForce != null" >
+        time_force = #{timeForce,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null" >
+        action = #{action,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actionIndex != null" >
+        action_index = #{actionIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="filled != null" >
+        filled = #{filled,jdbcType=INTEGER},
+      </if>
+      <if test="remaining != null" >
+        remaining = #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="avgFillPrice != null" >
+        avg_fill_price = #{avgFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lastFillPrice != null" >
+        last_fill_price = #{lastFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.homaer.fundsrv.dataobject.BrokerOrderDto" >
+    update t_broker_order
+    <set > 
+    <if test="clientid != null" >
+        clientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="permid != null" >
+        permId = #{permid,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null" >
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="totalquantity != null" >
+        totalquantity = #{totalquantity,jdbcType=INTEGER},
+      </if>
+      <if test="limitprice != null" >
+        limitprice = #{limitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="sentTime != null" >
+        sent_time = #{sentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timeForce != null" >
+        time_force = #{timeForce,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null" >
+        action = #{action,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="actionIndex != null" >
+        action_index = #{actionIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="filled != null" >
+        filled = #{filled,jdbcType=INTEGER},
+      </if>
+      <if test="remaining != null" >
+        remaining = #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="avgFillPrice != null" >
+        avg_fill_price = #{avgFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lastFillPrice != null" >
+        last_fill_price = #{lastFillPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <select id="getMaxId" parameterType="string" resultType="string">
+  	select max(order_id*1) from t_broker_order
+  </select>
+</mapper>

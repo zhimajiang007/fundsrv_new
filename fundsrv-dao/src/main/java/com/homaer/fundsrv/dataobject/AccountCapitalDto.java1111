@@ -1,0 +1,73 @@
+package com.homaer.fundsrv.dataobject;
+
+public class AccountCapitalDto {
+
+    private String accountName;
+
+    private String netLiquidation;
+
+    private String cashBalance;
+
+    private String unrealizedPnl;
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName == null ? null : accountName.trim();
+    }
+
+    public String getNetLiquidation() {
+        return netLiquidation;
+    }
+
+    public void setNetLiquidation(String netLiquidation) {
+        this.netLiquidation = netLiquidation == null ? null : netLiquidation.trim();
+    }
+
+    public String getCashBalance() {
+        return cashBalance;
+    }
+
+    public void setCashBalance(String cashBalance) {
+        this.cashBalance = cashBalance == null ? null : cashBalance.trim();
+    }
+
+    public String getUnrealizedPnl() {
+        return unrealizedPnl;
+    }
+
+    public void setUnrealizedPnl(String unrealizedPnl) {
+        this.unrealizedPnl = unrealizedPnl == null ? null : unrealizedPnl.trim();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        AccountCapitalDto other = (AccountCapitalDto) that;
+        return (this.getAccountName() == null ? other.getAccountName() == null : this.getAccountName().equals(other.getAccountName()))
+            && (this.getNetLiquidation() == null ? other.getNetLiquidation() == null : this.getNetLiquidation().equals(other.getNetLiquidation()))
+            && (this.getCashBalance() == null ? other.getCashBalance() == null : this.getCashBalance().equals(other.getCashBalance()))
+            && (this.getUnrealizedPnl() == null ? other.getUnrealizedPnl() == null : this.getUnrealizedPnl().equals(other.getUnrealizedPnl()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getAccountName() == null) ? 0 : getAccountName().hashCode());
+        result = prime * result + ((getNetLiquidation() == null) ? 0 : getNetLiquidation().hashCode());
+        result = prime * result + ((getCashBalance() == null) ? 0 : getCashBalance().hashCode());
+        result = prime * result + ((getUnrealizedPnl() == null) ? 0 : getUnrealizedPnl().hashCode());
+        return result;
+    }
+}

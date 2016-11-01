@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+     default-autowire="byName">
+
+	<bean id="taskExecutor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="5" />
+        <property name="maxPoolSize" value="100" />
+        <property name="keepAliveSeconds" value="30000"/>
+        <property name="queueCapacity" value="200" />
+    </bean> <!--参照JDK实现-->
+	
+	<bean id="apiContextUtil" class="com.homaer.biz.framework.api.ApiContextUtil" scope="singleton" />
+	
+	<bean id="springContextUtil" class="com.homaer.common.utils.SpringContextUtil" scope="singleton" />
+	
+	<bean id="pushTool" class="com.homaer.common.tools.jpush.JPushTool" scope="singleton" />
+	
+	<bean id="contextService" class="com.homaer.fundsrv.ContextService" scope="singleton" />
+	
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<props>
+				<prop key="resource.loader">file</prop>
+				<prop key="file.resource.loader.path">.</prop>
+				<prop key="file.resource.loader.class">
+					org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</prop>
+				<prop key="input.encoding">GBK</prop>
+				<prop key="output.encoding">GBK</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

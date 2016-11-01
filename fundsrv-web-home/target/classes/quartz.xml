@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+	default-lazy-init="false">
+
+	<description>Quartz的定时请求查询未完成委托交易</description>
+
+    <bean id="reqOpenOrderDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="reqOpenOrder" />
+       </property>
+       <property name="targetMethod">
+           <value>execute</value>
+       </property>
+       <property name="concurrent" value="false" />
+    </bean>
+	<bean id="reqOpenOrder" class="com.homaer.fundsrv.quartz.reqOpenOrder" />
+    
+    <!-- 配置触发器 -->
+    <bean id="reqOpenOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+       <property name="jobDetail">
+           <ref bean="reqOpenOrderDataJobDetail" />
+       </property>
+       <!-- 每10分钟一次调度 0 0 10,14,16 * * ? -->
+       <property name="cronExpression" value="0 0/30 * * * ?" />
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       <!-- 添加触发器 -->
+       <property name="triggers">
+           <list>
+              <ref bean="reqOpenOrderTrigger" />
+           </list>
+       </property>
+       <property name="autoStartup" value="true" />
+		<!-- Job接受applicationContext的成员变量名 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+    </bean>
+   
+   <!-- ==================================================== --> 
+    
+    <bean id="reqAccountSummaryDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="reqAccountSummary" />
+       </property>
+       <property name="targetMethod">
+           <value>execute</value>
+       </property>
+       <property name="concurrent" value="false" />
+    </bean>
+	<bean id="reqAccountSummary" class="com.homaer.fundsrv.quartz.reqAccountSummary" />
+    
+    <!-- 配置触发器 -->
+    <bean id="reqAccountSummaryTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+       <property name="jobDetail">
+           <ref bean="reqAccountSummaryDataJobDetail" />
+       </property>
+       <!-- 每10分钟一次调度 0 0 10,14,16 * * ? -->
+       <property name="cronExpression" value="0 0 13 * * ?" />
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       <!-- 添加触发器 -->
+       <property name="triggers">
+           <list>
+              <ref bean="reqAccountSummaryTrigger" />
+           </list>
+       </property>
+       <property name="autoStartup" value="true" />
+		<!-- Job接受applicationContext的成员变量名 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+    </bean>
+	
+</beans>

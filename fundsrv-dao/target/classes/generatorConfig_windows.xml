@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <classPathEntry location="C:/Java/mysql-connector-java-5.1.13-bin.jar" />
+  <context id="fundsrv" targetRuntime="MyBatis3" defaultModelType="conditional">
+  	
+  	<!-- <plugin type="org.mybatis.generator.plugins.SelectByPagePlugin" />  -->
+  	<!-- <plugin type="com.homaer.fundsrv.page.PaginationPlugin" /> -->
+  	<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />  
+
+    <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">      
+        <property name="searchString" value="Example$" />      
+        <property name="replaceString" value="Criteria" />      
+    </plugin>
+        
+    <commentGenerator>
+      <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+      <property name="suppressAllComments" value="true"/>
+      <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+    </commentGenerator>
+    <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+      connectionURL="jdbc:mysql://192.168.0.147:3306/homaer_crawler?useUnicode\=true&amp;characterEncoding\=UTF-8" 
+      userId="root" password="homaer2015" />
+      
+	<!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer  
+         true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal  
+     -->
+    <javaTypeResolver>
+     <property name="forceBigDecimals" value="false"/>
+  	</javaTypeResolver>
+    
+    <javaModelGenerator targetPackage="com.homaer.fundsrv.dataobject" targetProject="D:\workspace\fundsrv\fundsrv-dao\src\main\java">
+    <!-- enableSubPackages:是否让schema作为包的后缀 -->     
+      <property name="enableSubPackages" value="true"/>
+    <!-- 从数据库返回的值被清理前后的空格  -->  
+      <property name="trimStrings" value="true"/>
+  	</javaModelGenerator>
+  	
+  	<sqlMapGenerator targetPackage="com.homaer.fundsrv.sqlmap" targetProject="D:\workspace\fundsrv\fundsrv-web-home\src\main\resources">
+       <property name="enableSubPackages" value="true"/>
+  	</sqlMapGenerator>
+
+	<javaClientGenerator type="XMLMAPPER" targetPackage="com.homaer.fundsrv.mapper" targetProject="D:\workspace\fundsrv\fundsrv-dao\src\main\java">
+      <property name="enableSubPackages" value="true"/>
+	</javaClientGenerator>
+
+	<table tableName="t_fund_user" domainObjectName="FundUserDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+<!--
+	<table tableName="user_fund_log" domainObjectName="UserFundLogDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	<table tableName="t_fundsrv_unitnet_detail" domainObjectName="FundSrvUnitNetDetailDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+
+	<table tableName="t_user_risk" domainObjectName="UserRiskDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+
+	<table tableName="t_product_comment" domainObjectName="ProductCommentDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	
+	<table tableName="etf_raw_data" domainObjectName="EtfRawDataDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+            
+	<table tableName="etf_filter_data" domainObjectName="EtfFilterDataDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>            
+
+	<table tableName="t_option_recommand" domainObjectName="OptionRecommandDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>            
+ 
+	<table tableName="t_product_group" domainObjectName="ProductGroupDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+           
+	<table tableName="t_product_comment" domainObjectName="ProductCommentDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>            
+
+	<table tableName="t_appointment_info" domainObjectName="AppointmentInfoDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+            
+	<table tableName="t_recommand_description" domainObjectName="RecommandDescriptionDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	<table tableName="t_product_group" domainObjectName="ProductGroupDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+             
+	<table tableName="t_appointment_info" domainObjectName="AppointmentInfoDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+  
+	<table tableName="t_fundsrv" domainObjectName="FundSrvDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+-->                      
+<!--             
+	<table tableName="t_fundsrv_unitnet_detail" domainObjectName="FundSrvUnitNetDetailDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+ -->             
+<!-- 
+	<table tableName="USER_MEMBER" domainObjectName="UserMemberDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/> 
+	<table tableName="LOGON_APP" domainObjectName="LogonAppDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	<table tableName="USER_CARD" domainObjectName="UserCardDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/> 
+	<table tableName="OPERATOR" domainObjectName="OperatorDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/> 
+-->
+
+ <!-- 
+	<table tableName="USER_AUTH" domainObjectName="UserAuthDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+ 	<table tableName="TERMINAL_USER" domainObjectName="TerminalUserDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>    
+ 	<table tableName="TERMINAL" domainObjectName="TerminalDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+             
+	<table tableName="USER_ACCOUNT" domainObjectName="UserAccountDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	<table tableName="USER_ACCOUNT_LOG" domainObjectName="UserAccountLogDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+	<table tableName="USER_FILL" domainObjectName="UserFillDto" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"  
+            enableUpdateByExample="true"/>
+ -->                                                            
+
+  </context>
+</generatorConfiguration>

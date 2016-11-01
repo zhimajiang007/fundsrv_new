@@ -1,0 +1,6 @@
+<html>  
+<body>
+<h3>ip地址：<font color=red>${ipNum}</font>, 该服务器定时请求TWS10次，失败<font color=red>${connectFailNum}</font>次，注意检查！</h3>
+<h3>请求时间：<font color=red>${time}</font></h3>
+</body>
+</html>
